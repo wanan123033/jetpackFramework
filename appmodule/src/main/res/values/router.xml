@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="layouts">
+        <item>com.appmodule.layout.LayoutInflaterUtils</item>
+        <item>com.zwtqq.layout.LayoutInflaterUtils</item>
+        <item>com.hwjs.layout.LayoutInflaterUtils</item>
+        <item>com.hwsxq.layout.LayoutInflaterUtils</item>
+        <item>com.jgcj.layout.LayoutInflaterUtils</item>
+        <item>com.ts.layout.LayoutInflaterUtils</item>
+        <item>com.ldty.layout.LayoutInflaterUtils</item>
+        <item>com.ywqz.layout.LayoutInflaterUtils</item>
+        <item>com.dataselectmanager.layout.LayoutInflaterUtils</item>
+        <item>com.fileexpoter.layout.LayoutInflaterUtils</item>
+    </string-array>
+    <string-array name="events">
+        <item>com.appmodule.layoutevent.EventInflaterUtils</item>
+        <item>com.zwtqq.layoutevent.EventInflaterUtils</item>
+        <item>com.hwjs.layoutevent.EventInflaterUtils</item>
+        <item>com.hwsxq.layoutevent.EventInflaterUtils</item>
+        <item>com.jgcj.layoutevent.EventInflaterUtils</item>
+        <item>com.ts.layoutevent.EventInflaterUtils</item>
+        <item>com.ldty.layoutevent.EventInflaterUtils</item>
+        <item>com.ywqz.layoutevent.EventInflaterUtils</item>
+        <item>com.dataselectmanager.layoutevent.EventInflaterUtils</item>
+        <item>com.fileexpoter.layoutevent.EventInflaterUtils</item>
+    </string-array>
+</resources>

@@ -1,0 +1,30 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jetpackframework">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <service android:name=".fixdex.FixService" android:process=":fix" android:exported="true"/>
+        <service android:name=".virtual.VirtualInstallService" android:process=":install"/>
+        <service android:name=".virtual.delegate.RemoteService" />
+
+        <activity android:name="com.virtual.singleTop.landscape.v$1" android:launchMode="singleTop" android:screenOrientation="landscape"/>
+        <activity android:name="com.virtual.singleTop.portrait.v$1" android:launchMode="singleTop" android:screenOrientation="portrait"/>
+        <activity android:name="com.virtual.singleTask.landscape.v$2" android:launchMode="singleTask" android:screenOrientation="landscape"/>
+        <activity android:name="com.virtual.singleTask.portrait.v$2" android:launchMode="singleTask" android:screenOrientation="portrait"/>
+        <activity android:name="com.virtual.singleInstance.landscape.v$3" android:launchMode="singleInstance" android:screenOrientation="landscape"/>
+        <activity android:name="com.virtual.singleInstance.portrait.v$3" android:launchMode="singleInstance" android:screenOrientation="portrait"/>
+        <activity android:name="com.virtual.standard.landscape.v$0" android:launchMode="standard" android:screenOrientation="landscape"/>
+        <activity android:name="com.virtual.standard.portrait.v$0" android:launchMode="standard" android:screenOrientation="portrait"/>
+
+        <provider
+            android:authorities="com.virtual.remote"
+            android:name=".virtual.delegate.RemoteContentProvider" />
+    </application>
+</manifest>

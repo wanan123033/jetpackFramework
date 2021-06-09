@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+def getLayoutLibPath() {
+    return "${android.getSdkDirectory().getAbsolutePath()}" + "/platforms/" +
+            android.compileSdkVersion +"/data/layoutlib.jar"
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly files(getLayoutLibPath())
+    api "androidx.appcompat:appcompat:1.2.0"
+    api 'com.squareup.okhttp3:okhttp:3.11.0'
+    api 'com.squareup.okio:okio:2.2.2'
+    api 'com.zhy:okhttputils:2.6.2'
+//    api 'org.jetbrains:annotations-java5:15.0'
+    api "androidx.recyclerview:recyclerview:1.1.0"
+    api "androidx.legacy:legacy-support-v4:1.0.0"
+    api "com.bytedance.boost_multidex:boost_multidex:1.0.0"
+    api "com.google.android.material:material:1.2.1"
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    api 'androidx.room:room-runtime:2.2.5'
+    api project(':anno')
+    api project(':serialportapi')
+    api 'com.blankj:utilcodex:1.25.2'
+    api 'com.google.code.gson:gson:2.8.6'
+    api 'com.inuker.bluetooth:library:1.4.0'
+    api 'cn.pedant.sweetalert:library:1.3'
+    api 'com.tencent:mmkv-static:1.2.2'
+    api 'com.tonystark.android:socket:4.2.3'
+    api 'com.tonystark.android:socket-server:4.2.3'
+    api "androidx.lifecycle:lifecycle-livedata:2.2.0"
+    api "androidx.lifecycle:lifecycle-extensions:2.2.0"
+//    api 'me.jessyan:autosize:0.9.5'
+}

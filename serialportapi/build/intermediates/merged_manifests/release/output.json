@@ -1,0 +1,1 @@
+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":3,"versionName":"1.2","enabled":true,"outputFile":"serialportapi-release.aar","fullName":"release","baseName":"release","dirName":""},"path":"../../library_manifest/release/AndroidManifest.xml","properties":{"packageId":"android_serialport_api.sample","split":""}}]

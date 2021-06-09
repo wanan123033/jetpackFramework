@@ -1,0 +1,5 @@
+buildscript {
+    ext.isRouter=false  //在组件化模式之下是否可以单独运行子Moudel  true:可以 false:不可以
+    ext.R2Gen = true   //开启R2自编译生成
+
+}

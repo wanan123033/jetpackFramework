@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">dataSelectManager</string>
+    <string-array name="data_admin">
+        <item>个人名单导入</item>
+        <item>分组名单导入</item>
+        <item>名单下载</item>
+        <item>头像导入</item>
+        <item>头像检入</item>
+        <item>删除头像</item>
+        <item>数据备份</item>
+        <item>数据还原</item>
+        <item>数据查看</item>
+        <item>数据清空</item>
+        <item>成绩上传</item>
+        <item>成绩导出</item>
+        <item>模版导出</item>
+        <item>体温查看</item>
+        <item>体温导出</item>
+        <item>人脸特征检入</item>
+        <item>备份视频</item>
+        <item>软件更新</item>
+    </string-array>
+</resources>

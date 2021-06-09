@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/anno" />
+            <option value="$PROJECT_DIR$/appmodule" />
+            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/compiler" />
+            <option value="$PROJECT_DIR$/database" />
+            <option value="$PROJECT_DIR$/dataselectmanager" />
+            <option value="$PROJECT_DIR$/fileexpoter" />
+            <option value="$PROJECT_DIR$/frameworkx" />
+            <option value="$PROJECT_DIR$/gradlewPlugin" />
+            <option value="$PROJECT_DIR$/hwjs" />
+            <option value="$PROJECT_DIR$/hwsxq" />
+            <option value="$PROJECT_DIR$/jgcj" />
+            <option value="$PROJECT_DIR$/ldty" />
+            <option value="$PROJECT_DIR$/magicindicator" />
+            <option value="$PROJECT_DIR$/saferoom" />
+            <option value="$PROJECT_DIR$/serialportapi" />
+            <option value="$PROJECT_DIR$/ts" />
+            <option value="$PROJECT_DIR$/ywqz" />
+            <option value="$PROJECT_DIR$/zwtqq" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.jetpackframework.view.titlebar.CustomNavigatorBar
+        android:id="@+id/cnb_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/button_text_color"/>
+    <FrameLayout
+        android:id="@+id/frame_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

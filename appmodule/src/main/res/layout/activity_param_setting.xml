@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/icon_white_bg"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="34dp"
+            android:background="@drawable/btn_bg_white"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="31dp"
+            android:paddingTop="42dp"
+            android:paddingRight="25dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="测试名称:" />
+
+                <EditText
+                    android:id="@+id/et_test_name"
+                    android:layout_width="400dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/edit_search_bg"
+                    android:gravity="center"
+                    android:imeOptions="actionGo"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="测试地点:" />
+
+                <EditText
+                    android:id="@+id/et_test_site"
+                    android:layout_width="400dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/edit_search_bg"
+                    android:gravity="center"
+                    android:imeOptions="actionGo"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="服务器地址:" />
+
+                <EditText
+                    android:id="@+id/et_sever_ip"
+                    android:layout_width="242dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/edit_search_bg"
+                    android:gravity="center"
+                    android:imeOptions="actionDone"
+                    android:inputType="textUri"
+                    android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/btn_default"
+                    android:layout_width="73dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toLeftOf="@+id/tv_start_test"
+                    android:background="@drawable/btn_click_bg_unselected"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="默认"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/btn_bind"
+                    android:layout_width="73dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toLeftOf="@+id/tv_start_test"
+                    android:background="@drawable/btn_click_bg_selected"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="登录"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="  TCP地址  :" />
+
+                <EditText
+                    android:id="@+id/et_tcp_ip"
+                    android:layout_width="242dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/edit_search_bg"
+                    android:gravity="center"
+                    android:imeOptions="actionDone"
+                    android:inputType="textUri"
+                    android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/btn_tcp_test"
+                    android:layout_width="73dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toLeftOf="@+id/tv_start_test"
+                    android:background="@drawable/btn_click_bg_selected"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="测试"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_is_tcp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:button="@drawable/checkbox_switch_selected" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:layout_marginLeft="20dp"
+                    android:text="主机号:" />
+
+                <Spinner
+                    android:id="@+id/sp_host_id"
+                    android:layout_width="400dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/icon_spinner_bg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="原始信道:" />
+
+                <TextView
+                    android:id="@+id/txt_channel"
+                    style="@style/style_setting_tv_title"
+                    android:layout_width="400dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="left|center_vertical" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="520dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_custom_channel"
+                    style="@style/style_setting_tv_title"
+                    android:layout_centerVertical="true"
+                    android:text="自定信道:" />
+
+                <EditText
+                    android:id="@+id/edit_custom_channel"
+                    android:layout_width="200dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toRightOf="@+id/txt_custom_channel"
+                    android:background="@drawable/edit_search_bg"
+                    android:gravity="left|center_vertical"
+                    android:imeOptions="actionGo"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/edit_custom_channel"
+                    android:text="信道范围（1-140）"
+                    android:textColor="#000000" />
+
+                <CheckBox
+                    android:id="@+id/cb_custom_channel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:button="@drawable/checkbox_switch_selected" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="测试模式:" />
+
+                <Spinner
+                    android:id="@+id/sp_pattern"
+                    android:layout_width="400dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/icon_spinner_bg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_print_tool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="打印机选择:" />
+
+                <Spinner
+                    android:id="@+id/sp_print_tool"
+                    android:layout_width="290dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_spinner_bg" />
+
+
+                <TextView
+                    android:id="@+id/btn_print_setting"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/tv_start_test"
+                    android:background="@drawable/btn_click_bg_selected"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="打印设置"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="检录工具:" />
+
+                <Spinner
+                    android:id="@+id/sp_check_tool"
+                    android:layout_width="400dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/icon_spinner_bg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="监控绑定:" />
+
+                <LinearLayout
+                    android:layout_width="435dp"
+                    android:layout_height="35dp"
+                    android:gravity="right|center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="1dp">
+
+                    <TextView
+                        android:id="@+id/btn_monitoring_setting"
+                        style="@style/style_setting_tv_title"
+                        android:layout_width="100dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:padding="1dp"
+                        android:text="绑定设置"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <CheckBox
+                        android:id="@+id/cb_monitoring"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:button="@drawable/checkbox_switch_selected" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="体温检查:" />
+
+                <LinearLayout
+                    android:layout_width="435dp"
+                    android:layout_height="35dp"
+                    android:gravity="right|center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="1dp">
+
+                    <TextView
+                        android:id="@+id/btn_thermometer"
+                        style="@style/style_setting_tv_title"
+                        android:layout_width="120dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:padding="1dp"
+                        android:text="体温枪连接"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <CheckBox
+                        android:id="@+id/cb_thermometer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:button="@drawable/checkbox_switch_selected" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="实时上传:" />
+
+                <LinearLayout
+                    android:layout_width="435dp"
+                    android:layout_height="35dp"
+                    android:gravity="right|center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="1dp">
+
+                    <TextView
+                        android:id="@+id/btn_net_setting"
+                        style="@style/style_setting_tv_title"
+                        android:layout_width="100dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:padding="1dp"
+                        android:text="网络设置"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <CheckBox
+                        android:id="@+id/sw_rt_upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:button="@drawable/checkbox_switch_selected" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+
+            <RelativeLayout
+                android:layout_width="520dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:padding="1dp">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="自动打印:" />
+
+                <CheckBox
+                    android:id="@+id/sw_auto_print"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:button="@drawable/checkbox_switch_selected" />
+            </RelativeLayout>
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+            <RelativeLayout
+                android:layout_width="520dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:padding="1dp">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="成绩播报:" />
+
+                <CheckBox
+                    android:id="@+id/sw_auto_broadcast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:button="@drawable/checkbox_switch_selected" />
+            </RelativeLayout>
+
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+            <RelativeLayout
+                android:layout_width="520dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:padding="1dp">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="增加考生:" />
+
+                <CheckBox
+                    android:id="@+id/sw_add_student"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:button="@drawable/checkbox_switch_selected" />
+            </RelativeLayout>
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+            <RelativeLayout
+                android:layout_width="520dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:padding="1dp">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="单点测试:" />
+
+                <CheckBox
+                    android:id="@+id/sw_auto_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:button="@drawable/checkbox_switch_selected" />
+            </RelativeLayout>
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="条码长度(0-无限制):" />
+
+                <Spinner
+                    android:id="@+id/sp_qr_length"
+                    android:layout_width="320dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/icon_spinner_bg" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="音量调节：" />
+
+                <SeekBar
+                    android:id="@+id/sb_volume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+
+            <View
+                style="@style/divider_gray_horizontal_style"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/style_setting_tv_title"
+                    android:text="有线网络与wifi同时使用：" />
+
+                <CheckBox
+                    android:id="@+id/cb_route"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:button="@null"
+                    android:drawableRight="@drawable/checkbox_switch_selected"
+                    android:drawablePadding="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="4"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@+id/sw_identity_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:button="@drawable/checkbox_switch_selected" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_advanced"
+                style="@style/style_setting_tv_title"
+                android:layout_width="186dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="51dp"
+                android:layout_marginBottom="28dp"
+                android:background="@drawable/btn_click_bg_selected"
+                android:gravity="center"
+                android:text="@string/advanced_setting"
+                android:textColor="#FFFFFF" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
