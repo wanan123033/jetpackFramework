@@ -21,7 +21,6 @@ public class ARouterApplicationDelegate implements ApplicationDelegate {
     private ApplicationHandler handler;
 
     private static ARouterApplicationDelegate delegate;
-    private String projectName;
 
     private ARouterApplicationDelegate(){
 
@@ -32,9 +31,6 @@ public class ARouterApplicationDelegate implements ApplicationDelegate {
             delegate = new ARouterApplicationDelegate();
         }
         return delegate;
-    }
-    public void setProjectName(String projectName){
-        this.projectName = projectName;
     }
 
     @Override

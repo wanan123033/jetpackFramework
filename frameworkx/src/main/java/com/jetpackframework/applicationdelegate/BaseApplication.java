@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 
 import com.bytedance.boost_multidex.BoostMultiDexApplication;
 import com.jetpackframework.ActivityLifecycleCallbacks;
+import com.jetpackframework.ioc.ARouterEventClassUtil;
+import com.jetpackframework.ioc.ARouterLayoutUtil;
 
 
 public abstract class BaseApplication extends Application {
@@ -25,6 +27,8 @@ public abstract class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ARouterLayoutUtil.getInstance().init(this);
+        ARouterEventClassUtil.getInstance().init(this);
         ApplicationCall.callOnCreate(handler);
     }
 

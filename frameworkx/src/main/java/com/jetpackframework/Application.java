@@ -8,7 +8,5 @@ public class Application extends BaseApplication {
         ApplicationDelegate delegate = ApplicationDelegate.getInstance();
         return delegate;
     }
-    public void setProjectName(String projectName){
-        ApplicationDelegate.getInstance().setProjectName(projectName);
-    }
+
 }

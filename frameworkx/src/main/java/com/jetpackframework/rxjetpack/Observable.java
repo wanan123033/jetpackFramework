@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.lifecycle.LiveData;
 
+import com.commonsware.cwac.saferoom.SafeHelperFactory;
 import com.jetpackframework.SparseArray;
 import com.jetpackframework.rxjetpack.observable.ObservableCreate;
 import com.jetpackframework.rxjetpack.observable.ObservableDoOnNext;
@@ -57,9 +58,9 @@ public abstract class Observable<T> implements ObservableSource<T> {
 
     /**
      * 延时任务
-     * @param delay
-     * @param unit
-     * @param scheduler
+     * @param delay   延时时长
+     * @param unit  延时时长单位
+     * @param scheduler  延时任务所在的线程
      * @return
      */
     public Observable<T> timer(long delay, TimeUnit unit,Schedule scheduler){
@@ -164,6 +165,7 @@ public abstract class Observable<T> implements ObservableSource<T> {
      */
     public static <T> Observable<T> liveData(LiveData<T> liveData){
         Objects.requireNonNull(liveData);
+
         return RxJetpack.onAssembly(new ObservableLiveData<T>(liveData));
     }
 

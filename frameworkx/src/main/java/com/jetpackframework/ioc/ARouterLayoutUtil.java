@@ -1,12 +1,15 @@
 package com.jetpackframework.ioc;
 
+import android.app.Application;
 import android.util.Log;
 
+import com.gwm.annotation.router.Merge;
 import com.jetpackframework.ContextUtil;
 import com.jetpackframework.arouter.ARouterUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,33 +21,40 @@ import java.util.Set;
 public class ARouterLayoutUtil implements LayoutUtil{
     private static final Map<Integer,String> layouts;
     private Map<Integer,IViewBind> layoutArr;
-
     public static ARouterLayoutUtil instance;
     static {
         layouts = new HashMap<>();
-        layouts.clear();
-        List<Class<?>> com = ARouterUtil.foreachClass(ContextUtil.get(),"layouts");
-        for (Class clazz : com){
-            try {
-                Field events1 = clazz.getDeclaredField("layouts");
-                events1.setAccessible(true);
-                Method getInstance = clazz.getMethod("getInstance");
-                Object obj = getInstance.invoke(null);
-                Map<Integer,String> o = (Map<Integer,String>) events1.get(obj);
-                Set<Integer> integers = o.keySet();
-                for (Integer integer : integers){
-                    layouts.put(integer,o.get(integer));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
     }
     public static ARouterLayoutUtil getInstance() {
         if(instance == null){
             instance = new ARouterLayoutUtil();
         }
         return instance;
+    }
+
+    public void init(Application application){
+        layouts.clear();
+        Merge merge = application.getClass().getAnnotation(Merge.class);
+        if (merge != null){
+            String[] value = merge.value();
+            for (String va : value){
+                try {
+                    Class event = Class.forName("com."+va+".layout.LayoutInflaterUtils");
+                    Field events1 = event.getDeclaredField("layouts");
+                    events1.setAccessible(true);
+                    Method getInstance = event.getMethod("getInstance");
+                    Object obj = getInstance.invoke(null);
+                    Map<Integer,String> o = (Map<Integer,String>) events1.get(obj);
+                    Set<Integer> integers = o.keySet();
+                    for (Integer integer : integers){
+                        layouts.put(integer,o.get(integer));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override

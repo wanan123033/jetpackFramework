@@ -128,6 +128,5 @@ public class MainActivity extends BaseActivity<activity_app_main> {
 //                arouterActivity(ItemContract.getZyRouterUrl(ItemContract.getCurrentItemCode()));
 //            }
 //        }
-
     }
 }

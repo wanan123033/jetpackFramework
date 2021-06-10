@@ -4,8 +4,6 @@ import com.commonsware.cwac.saferoom.SafeHelperFactory;
 import com.gwm.annotation.room.RoomDatabaseOpenHelper;
 import com.gwm.annotation.room.RoomFactory;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 @RoomDatabaseOpenHelper(version = 1)

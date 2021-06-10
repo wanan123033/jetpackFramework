@@ -62,7 +62,7 @@ public interface RouterContract {
     String ROUTER_TEMPERATURESELECTACTIVITY = APP_MAIN_DATASELECTMANAGER + PACKAGE_NAME + TEMPERATURESELECTACTIVITY;
 
     /**************************************文件管理器fileapp*********************************************************************/
-    String APP_MAIN_FILEAPP = "fileapp";
+    String APP_MAIN_FILEAPP = "fileexpoter";
     String FILEEXPORTACTIVITY = "app/fileExportActivity";
     String FILEEXPORTFRAGMENT = "app/fileExportFragment";
     String ROUTER_FILEEXPORTACTIVITY = APP_MAIN_FILEAPP + PACKAGE_NAME + FILEEXPORTACTIVITY;

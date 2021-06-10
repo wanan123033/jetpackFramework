@@ -1,33 +1,47 @@
 package com.jetpackframework.ioc;
 
+import android.app.Application;
 import android.util.Log;
 
-import com.jetpackframework.ContextUtil;
-import com.jetpackframework.arouter.ARouterUtil;
+import com.gwm.annotation.router.Merge;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 解决EventClassUtil在组件化架构中的合并问题
  */
 public class ARouterEventClassUtil implements EventClassUtil{
     private HashMap<String,IEventClass> eventArr;
-    private static final List<Class<?>> com;
+    private List<Class<?>> com;
     public static ARouterEventClassUtil instance;
 
-    static {
-        com = ARouterUtil.foreachClass(ContextUtil.get(),"events");
-    }
     public static ARouterEventClassUtil getInstance() {
         if(instance == null){
             instance = new ARouterEventClassUtil();
         }
         return instance;
+    }
+    public void init(Application application) {
+        Merge merge = application.getClass().getAnnotation(Merge.class);
+        if (merge != null){
+            String[] value = merge.value();
+            if (com == null){
+                com = new ArrayList<>();
+            }
+            com.clear();
+            for (String va : value){
+                Class event = null;
+                try {
+                    event = Class.forName("com."+va+".layoutevent.EventInflaterUtils");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                com.add(event);
+            }
+        }
     }
 
     @Override

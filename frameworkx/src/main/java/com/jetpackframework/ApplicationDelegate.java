@@ -40,9 +40,6 @@ public class ApplicationDelegate implements com.jetpackframework.applicationdele
 //        fixDex = FixDexApplicationDelegate.getInstance();
         arouter = ARouterApplicationDelegate.getInstance();
     }
-    public void setProjectName(String projectName){
-        arouter.setProjectName(projectName);
-    }
 
     @Override
     public Handler getHandler() {

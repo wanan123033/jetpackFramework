@@ -10,13 +10,11 @@ import com.jetpackframework.fixdex.FixUtil;
 import com.jetpackframework.virtual.Virtual;
 import com.jetpackframework.virtual.VirtualConfig;
 
-@Merge({"appmodule","dataselectmanager","fileapp"})
+@Merge({"appmodule","dataselectmanager","fileexpoter","hwjs","hwsxq","jgcj","ldty","ts","ywqz","zwtqq"})
 public class MyApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
-        ApplicationDelegate.getInstance().setProjectName("appmodule");
         super.attachBaseContext(base);
-
         FixConfig config = new FixConfig.Builder().builder();
         FixUtil.install(config);
         VirtualConfig config1 = new VirtualConfig.Builder()

@@ -12,7 +12,6 @@ import java.util.Iterator;
 
 public class ObservableFrom<T> extends Observable<T> {
 
-
     private Iterator<T> iterator;
 
     public ObservableFrom(Iterator<T> iterator) {
