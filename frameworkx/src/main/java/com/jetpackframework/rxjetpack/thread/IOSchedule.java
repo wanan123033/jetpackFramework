@@ -2,6 +2,7 @@ package com.jetpackframework.rxjetpack.thread;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 public class IOSchedule implements Schedule {
@@ -9,6 +10,10 @@ public class IOSchedule implements Schedule {
     private final IOWorker worker;
     private IOSchedule(){
         worker = new IOWorker();
+    }
+
+    public IOSchedule(ThreadFactory threadFactory){
+        worker = new IOWorker(threadFactory);
     }
 
     public static synchronized Schedule getInstance() {
@@ -31,8 +36,13 @@ public class IOSchedule implements Schedule {
     private static class IOWorker implements Worker{
         private ScheduledExecutorService executor;
         public IOWorker(){
-            executor = Executors.newScheduledThreadPool(3) ;
+            executor = Executors.newScheduledThreadPool(3);
         }
+
+        public IOWorker(ThreadFactory threadFactory) {
+            executor = Executors.newScheduledThreadPool(3,threadFactory);
+        }
+
         @Override
         public void schedule(Runnable runnable) {
             executor.execute(runnable);

@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 public class NewThreadSchedule implements Schedule {
-    private static final ThreadFactory factory = new RxThreadFactory();
+    private ThreadFactory factory;
     private NewThreadWorker worker;
 
     private static Schedule schedule;
@@ -16,7 +16,12 @@ public class NewThreadSchedule implements Schedule {
         }
         return schedule;
     }
-    private NewThreadSchedule(){}
+    private NewThreadSchedule(){
+        factory = new RxThreadFactory();
+    }
+    public NewThreadSchedule(ThreadFactory factory){
+        this.factory = factory;
+    }
     @Override
     public Worker createWorker() {
         if (worker == null){

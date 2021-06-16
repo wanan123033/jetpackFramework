@@ -1,5 +1,12 @@
 package com.jetpackframework.rxjetpack;
 
+import com.jetpackframework.rxjetpack.thread.ExecutorSchedule;
+import com.jetpackframework.rxjetpack.thread.IOSchedule;
+import com.jetpackframework.rxjetpack.thread.NewThreadSchedule;
+import com.jetpackframework.rxjetpack.thread.Schedule;
+
+import java.util.concurrent.ThreadFactory;
+
 public class RxJetpack {
     private Function<Observable,Observable> onObservableAssembly;
     private static RxJetpack rxJetpack;
@@ -25,6 +32,16 @@ public class RxJetpack {
         return rxJetpack;
     }
     public static void reset(){
-        rxJetpack.setOnObservableAssembly(null);
+        setOnObservableAssembly(null);
+    }
+
+    public static Schedule createIoSchedule(ThreadFactory factory){
+        return new IOSchedule(factory);
+    }
+    public static Schedule createNewThreadSchedule(ThreadFactory factory){
+        return new NewThreadSchedule(factory);
+    }
+    public static Schedule createExectorSchedule(ThreadFactory factory){
+        return new ExecutorSchedule(factory);
     }
 }

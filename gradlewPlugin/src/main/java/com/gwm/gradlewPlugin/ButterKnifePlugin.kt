@@ -42,7 +42,6 @@ class ButterKnifePlugin : Plugin<Project> {
             configureR2Generation(project, applicationVariants)
 
           }
-          OutRouterTransform().execute(project)
         }
       }
     }

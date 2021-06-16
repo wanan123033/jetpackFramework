@@ -1,7 +1,9 @@
 package com.mindmachine.appmodule.activity;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,8 @@ import com.gwm.annotation.layout.OnClick;
 import com.gwm.annotation.router.ARouter;
 import com.jetpackframework.base.BaseActivity;
 import com.jetpackframework.base.JetpackApplicationDelegate;
+import com.jetpackframework.virtual.IVirtualInstallListenner;
+import com.jetpackframework.virtual.Virtual;
 import com.midmachine.database.DBManager;
 import com.midmachine.database.entity.Item;
 import com.mindmachine.appmodule.R;
@@ -22,6 +26,7 @@ import com.mindmachine.common.contract.RouterContract;
 import com.mindmachine.common.setting.SystemSetting;
 import com.tencent.mmkv.MMKV;
 
+import java.io.File;
 import java.util.List;
 
 @Layout(R2.layout.activity_app_main)
@@ -41,24 +46,24 @@ public class MainActivity extends BaseActivity<activity_app_main> {
         addFirstToast();
 
 
-//        try {
-//            Virtual.getInstaller(this).install(new File("/sdcard/app-debug.apk"), new IVirtualInstallListenner.Stub() {
-//                @Override
-//                public void installSuccess(String packageName) throws RemoteException {
-//                    Intent intent = new Intent();
-//                    ComponentName componentName = new ComponentName("com.fairplay.test","com.fairplay.test.TestAActivity");
-//                    intent.setComponent(componentName);
-//                    startActivity(intent);
-//                }
-//
-//                @Override
-//                public void installFail(String errMessage, int errCode) throws RemoteException {
-//
-//                }
-//            });
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Virtual.getInstaller(this).install(new File("/sdcard/app-debug.apk"), new IVirtualInstallListenner.Stub() {
+                @Override
+                public void installSuccess(String packageName) throws RemoteException {
+                    Intent intent = new Intent();
+                    ComponentName componentName = new ComponentName("com.fairplay.test","com.fairplay.test.TestAActivity");
+                    intent.setComponent(componentName);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void installFail(String errMessage, int errCode) throws RemoteException {
+
+                }
+            });
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     @OnClick({R2.id.btn_test,R2.id.btn_select,R2.id.btn_print_test,R2.id.btn_param_setting,R2.id.btn_data_manager,R2.id.btn_system,R2.id.btn_led,R2.id.btn_device_out})

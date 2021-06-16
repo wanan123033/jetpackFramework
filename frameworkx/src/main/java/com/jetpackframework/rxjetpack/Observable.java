@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.commonsware.cwac.saferoom.SafeHelperFactory;
 import com.jetpackframework.SparseArray;
+import com.jetpackframework.rxjetpack.observable.ObservableConcat;
 import com.jetpackframework.rxjetpack.observable.ObservableCreate;
 import com.jetpackframework.rxjetpack.observable.ObservableDoOnNext;
 import com.jetpackframework.rxjetpack.observable.ObservableFilter;
@@ -155,6 +156,17 @@ public abstract class Observable<T> implements ObservableSource<T> {
     public <R> Observable<R> flatMap(Function<T,ObservableSource<R>> function){
         Objects.requireNonNull(function);
         return RxJetpack.onAssembly(new ObservableFlatMap<T,R>(this,function));
+    }
+
+    /**
+     * 合并多个Observable
+     * @param observable
+     * @param <T>
+     * @return
+     */
+    public static <T> Observable<T> concat(Observable<T>... observable){
+        Objects.requireNonNull(observable);
+        return RxJetpack.onAssembly(new ObservableConcat(observable));
     }
 
     /**

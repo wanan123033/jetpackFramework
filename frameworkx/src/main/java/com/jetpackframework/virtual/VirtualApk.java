@@ -81,6 +81,7 @@ public class VirtualApk implements Parcelable {
             }
         }
 
+
     }
 
     private void makeApplication(ApplicationInfo applicationInfo) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
@@ -193,7 +194,15 @@ public class VirtualApk implements Parcelable {
     }
 
     public ResolveInfo resolveService(Intent target, int flags) {
-        return null;
+        Log.e("TAG----",target.getComponent().toString());
+        ResolveInfo info = new ResolveInfo();
+        ComponentName componentName = target.getComponent();
+        for (ServiceInfo serviceInfo : packageInfo.services){
+            if (serviceInfo.packageName.equals(componentName.getPackageName()) && serviceInfo.name.equals(componentName.getClassName())){
+                info.serviceInfo = serviceInfo;
+            }
+        }
+        return info;
     }
 
     public ProviderInfo getProviderInfo(Uri contentUri) {

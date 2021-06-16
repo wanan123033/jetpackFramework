@@ -3,9 +3,10 @@ package com.jetpackframework.rxjetpack.thread;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-public class ExecutorSchedule implements Schedule {
+public class  ExecutorSchedule implements Schedule {
     private ExecutorService executor;
     private ExecutorWorker worker;
 
@@ -20,6 +21,9 @@ public class ExecutorSchedule implements Schedule {
 
     private ExecutorSchedule(ExecutorService executor) {
         this.executor = executor;
+    }
+    public ExecutorSchedule(ThreadFactory factory){
+        this.executor = Executors.newCachedThreadPool(factory);
     }
 
     @Override
