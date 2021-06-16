@@ -24,7 +24,7 @@ import dalvik.system.DexClassLoader;
 
 public class RemoteService extends Service {
     public static final int EXTRA_COMMAND_START_SERVICE = 11;
-    public static final int EXTRA_COMMAND_BINDSERVICE = 22;
+    public static final int EXTRA_COMMAND_BIND_SERVICE = 22;
     public static final int EXTRA_COMMAND_STOP_SERVICE = 33;
     public static final int EXTRA_COMMAND_UNBIND_SERVICE = 44;
 
@@ -53,24 +53,26 @@ public class RemoteService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        int command = intent.getIntExtra(EXTRA_COMMAND,0);
-        try {
-            switch (command){
-                case EXTRA_COMMAND_START_SERVICE:
-                    startService((Intent) intent.getParcelableExtra(EXTRA_INTENT),flags,startId);
-                    break;
-                case EXTRA_COMMAND_BINDSERVICE:
-                    bindService((Intent) intent.getParcelableExtra(EXTRA_INTENT),flags,startId);
-                    break;
-                case EXTRA_COMMAND_UNBIND_SERVICE:
-                    unbindService((Intent) intent.getParcelableExtra(EXTRA_INTENT),flags,startId);
-                    break;
-                case EXTRA_COMMAND_STOP_SERVICE:
-                    stopService((Intent) intent.getParcelableExtra(EXTRA_INTENT),flags,startId);
-                    break;
+        if (intent != null) {
+            int command = intent.getIntExtra(EXTRA_COMMAND, 0);
+            try {
+                switch (command) {
+                    case EXTRA_COMMAND_START_SERVICE:
+                        startService((Intent) intent.getParcelableExtra(EXTRA_INTENT), flags, startId);
+                        break;
+                    case EXTRA_COMMAND_BIND_SERVICE:
+                        bindService((Intent) intent.getParcelableExtra(EXTRA_INTENT), flags, startId);
+                        break;
+                    case EXTRA_COMMAND_UNBIND_SERVICE:
+                        unbindService((Intent) intent.getParcelableExtra(EXTRA_INTENT), flags, startId);
+                        break;
+                    case EXTRA_COMMAND_STOP_SERVICE:
+                        stopService((Intent) intent.getParcelableExtra(EXTRA_INTENT), flags, startId);
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
         return super.onStartCommand(intent, flags, startId);
     }

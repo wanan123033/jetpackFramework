@@ -66,7 +66,7 @@ public class ActivityManagerProxy implements InvocationHandler {
             if (info != null) {
                 Bundle bundle = new Bundle();
                 bundle.putBinder("sc", (IBinder) connection);
-                startDelegateServiceForTarget(intent,info,bundle,RemoteService.EXTRA_COMMAND_BINDSERVICE);
+                startDelegateServiceForTarget(intent,info,bundle,RemoteService.EXTRA_COMMAND_BIND_SERVICE);
             }
         }
         return 1;
