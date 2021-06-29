@@ -18,6 +18,7 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+
 public class SoInstaller {
     private static final String FILE_NAME = "so_version";
 
@@ -31,17 +32,24 @@ public class SoInstaller {
                 for (String cpuArch : Build.SUPPORTED_ABIS) {
 
                     if (findAndCopyNativeLib(zipfile, context, cpuArch, packageInfo, nativeLibDir)) {
+                        //加载so文件
+//                        loadLibrary(nativeLibDir.getAbsolutePath());
                         return;
                     }
                 }
 
             } else {
                 if (findAndCopyNativeLib(zipfile, context, Build.CPU_ABI, packageInfo, nativeLibDir)) {
+                    //加载so文件
+//                    loadLibrary(nativeLibDir.getAbsolutePath());
                     return;
                 }
             }
 
             findAndCopyNativeLib(zipfile, context, "armeabi", packageInfo, nativeLibDir);
+
+            //加载so文件
+//            loadLibrary(nativeLibDir.getAbsolutePath());
 
         } finally {
             zipfile.close();
@@ -128,5 +136,14 @@ public class SoInstaller {
     private static int getSoVersion(Context context, String name) {
         SharedPreferences preferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         return preferences.getInt(name, 0);
+    }
+    private static void loadLibrary(String path){
+        File file = new File(path);
+        if (file.isDirectory()){
+            File[] files = file.listFiles();
+            for (File f : files){
+                System.load(f.getAbsolutePath());
+            }
+        }
     }
 }

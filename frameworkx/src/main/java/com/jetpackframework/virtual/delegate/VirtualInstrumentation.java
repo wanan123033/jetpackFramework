@@ -1,23 +1,29 @@
 package com.jetpackframework.virtual.delegate;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Application;
 import android.app.Instrumentation;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.jetpackframework.ContextUtil;
 import com.jetpackframework.Reflector;
 import com.jetpackframework.arouter.Router;
 import com.jetpackframework.virtual.Contracts;
 import com.jetpackframework.virtual.VirtualApk;
 import com.jetpackframework.virtual.VirtualInstaller;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -26,6 +32,7 @@ import dalvik.system.DexClassLoader;
 public class VirtualInstrumentation extends Instrumentation {
     private final VirtualInstaller installer;
     private final Instrumentation instrumentation;
+    private VirtualApk apk;
 
     public VirtualInstrumentation(VirtualInstaller installer, Instrumentation instrumentation) {
         this.installer = installer;
@@ -150,14 +157,24 @@ public class VirtualInstrumentation extends Instrumentation {
             }
         }
         try {
-            VirtualApk apk = installer.getVirtualApk(packageName);
+
+            apk = installer.getVirtualApk(packageName);
             DexClassLoader classLoader = apk.getClassLoader();
             Activity activity = (Activity) classLoader.loadClass(className).newInstance();
+            activity.setIntent(intent);
             Reflector.QuietReflector.with(activity).field("mResources").set(apk.getResources());
             return activity;
         } catch (RemoteException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void callActivityOnCreate(Activity activity, Bundle icicle) {
+        if (apk != null) {
+            Reflector.QuietReflector.with(activity).field("mBase").set(new PluginContext(apk, ContextUtil.getAppContext()));
+        }
+        instrumentation.callActivityOnCreate(activity, icicle);
     }
 }

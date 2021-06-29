@@ -4,8 +4,8 @@ import com.jetpackframework.applicationdelegate.BaseApplication;
 
 public class Application extends BaseApplication {
     @Override
-    protected ApplicationDelegate createApplicationDelegate() {
-        ApplicationDelegate delegate = ApplicationDelegate.getInstance();
+    protected com.jetpackframework.applicationdelegate.ApplicationDelegate createApplicationDelegate() {
+        com.jetpackframework.applicationdelegate.ApplicationDelegate delegate = new MergeApplicationDelegate();
         return delegate;
     }
 

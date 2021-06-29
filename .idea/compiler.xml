@@ -31,6 +31,7 @@
       <module name="jetpackframework.jgcj" target="1.8" />
       <module name="jetpackframework.ldty" target="1.8" />
       <module name="jetpackframework.magicindicator" target="1.8" />
+      <module name="jetpackframework.merga" target="1.8" />
       <module name="jetpackframework.saferoom" target="1.8" />
       <module name="jetpackframework.serialportapi" target="1.8" />
       <module name="jetpackframework.ts" target="1.8" />

@@ -46,24 +46,24 @@ public class MainActivity extends BaseActivity<activity_app_main> {
         addFirstToast();
 
 
-        try {
-            Virtual.getInstaller(this).install(new File("/sdcard/app-debug.apk"), new IVirtualInstallListenner.Stub() {
-                @Override
-                public void installSuccess(String packageName) throws RemoteException {
-                    Intent intent = new Intent();
-                    ComponentName componentName = new ComponentName("com.fairplay.test","com.fairplay.test.TestAActivity");
-                    intent.setComponent(componentName);
-                    startActivity(intent);
-                }
-
-                @Override
-                public void installFail(String errMessage, int errCode) throws RemoteException {
-
-                }
-            });
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Virtual.getInstaller(this).install(new File("/sdcard/app-debug.apk"), new IVirtualInstallListenner.Stub() {
+//                @Override
+//                public void installSuccess(String packageName) throws RemoteException {
+//                    Intent intent = new Intent();
+//                    ComponentName componentName = new ComponentName("com.fairplay.test","com.fairplay.test.MainActivity");
+//                    intent.setComponent(componentName);
+//                    startActivity(intent);
+//                }
+//
+//                @Override
+//                public void installFail(String errMessage, int errCode) throws RemoteException {
+//
+//                }
+//            });
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @OnClick({R2.id.btn_test,R2.id.btn_select,R2.id.btn_print_test,R2.id.btn_param_setting,R2.id.btn_data_manager,R2.id.btn_system,R2.id.btn_led,R2.id.btn_device_out})

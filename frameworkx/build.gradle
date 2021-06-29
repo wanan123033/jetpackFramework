@@ -32,7 +32,6 @@ dependencies {
     api 'com.squareup.okhttp3:okhttp:3.11.0'
     api 'com.squareup.okio:okio:2.2.2'
     api 'com.zhy:okhttputils:2.6.2'
-//    api 'org.jetbrains:annotations-java5:15.0'
     api "androidx.recyclerview:recyclerview:1.1.0"
     api "androidx.legacy:legacy-support-v4:1.0.0"
     api "com.bytedance.boost_multidex:boost_multidex:1.0.0"
@@ -50,5 +49,7 @@ dependencies {
     api 'com.tonystark.android:socket-server:4.2.3'
     api "androidx.lifecycle:lifecycle-livedata:2.2.0"
     api "androidx.lifecycle:lifecycle-extensions:2.2.0"
+//    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc4'
+//    implementation 'com.google.auto.service:auto-service:1.0-rc4'
 //    api 'me.jessyan:autosize:0.9.5'
 }

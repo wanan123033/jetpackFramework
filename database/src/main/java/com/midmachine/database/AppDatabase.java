@@ -1,15 +1,12 @@
 package com.midmachine.database;
 
-import com.commonsware.cwac.saferoom.SafeHelperFactory;
-import com.gwm.annotation.room.RoomDatabaseOpenHelper;
-import com.gwm.annotation.room.RoomFactory;
 
-import java.nio.charset.StandardCharsets;
+import com.gwm.annotation.room.RoomDatabaseOpenHelper;
 
 @RoomDatabaseOpenHelper(version = 1)
 public class AppDatabase {
-    @RoomFactory
-    public static final SafeHelperFactory factory = new SafeHelperFactory("123456".getBytes(StandardCharsets.UTF_8));
+//    @RoomFactory
+//    public static final SafeHelperFactory factory = new SafeHelperFactory("123456".getBytes(StandardCharsets.UTF_8));
 
 
 //    @Migration

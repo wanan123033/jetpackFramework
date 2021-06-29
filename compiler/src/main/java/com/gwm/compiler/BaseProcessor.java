@@ -16,6 +16,8 @@ import java.util.List;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
+import javax.lang.model.element.AnnotationMirror;
+import javax.tools.Diagnostic;
 
 /**
  * Created by Administrator on 2019/1/15.
@@ -77,6 +79,18 @@ public abstract class BaseProcessor extends AbstractProcessor {
             cs[0] -= 32;
         }
         return String.valueOf(cs);
+    }
+    public void log(String msg) {
+        if (processingEnv.getOptions().containsKey("debug")) {
+            processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, msg);
+        }
+    }
 
+    public void error(String msg, javax.lang.model.element.Element element, AnnotationMirror annotation) {
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, msg, element, annotation);
+    }
+
+    public void fatalError(String msg) {
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "FATAL ERROR: " + msg);
     }
 }

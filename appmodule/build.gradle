@@ -34,8 +34,6 @@ android {
             jniLibs.srcDirs=['libs']
         }
     }
-
-
     signingConfigs {
         config {
             keyAlias 'mindMachine'
@@ -49,6 +47,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':frameworkx')
+    implementation project(':merga')
     annotationProcessor project(':compiler')
     api project (':common')
     api project (':database')
@@ -64,3 +63,5 @@ dependencies {
         implementation project(':fileexpoter')
     }
 }
+
+

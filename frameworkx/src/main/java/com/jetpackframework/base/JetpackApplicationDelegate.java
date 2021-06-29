@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Process;
+import android.util.Log;
 
 import com.bytedance.boost_multidex.BoostMultiDex;
 import com.bytedance.boost_multidex.BoostMultiDexApplication;

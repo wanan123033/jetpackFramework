@@ -1,5 +1,6 @@
+include ':merga'
 rootProject.name='jetpackframework'
-include ':frameworkx', ':anno', ':saferoom', ':magicindicator'
+include ':frameworkx', ':anno', ':magicindicator'
 include ':compiler'
 include ':gradlewPlugin'
 include ':appmodule'

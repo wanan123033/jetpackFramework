@@ -21,9 +21,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.jetpackframework.ActivityLifecycleCallbacks;
 import com.jetpackframework.ContextUtil;
 import com.jetpackframework.Reflector;
 import com.jetpackframework.virtual.delegate.PackageParser;
+import com.jetpackframework.virtual.delegate.PluginContext;
 
 import java.io.File;
 import java.util.List;
@@ -41,7 +43,7 @@ public class VirtualApk implements Parcelable {
     private Resources resources;
     private Instrumentation instrumentation;
     private DexClassLoader classLoader;
-    private Application app;
+    public Application app;
 
 
 
@@ -67,20 +69,20 @@ public class VirtualApk implements Parcelable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        for (ActivityInfo info : packageInfo.receivers){
-            BroadcastReceiver receiver = null;
-            try {
-                receiver = BroadcastReceiver.class.cast(classLoader.loadClass(info.name).newInstance());
-                List<IntentFilter> intentFilters = map.get(info.packageName+"/"+info.name);
-                for (IntentFilter intentFilter : intentFilters){
-                    context.registerReceiver(receiver,intentFilter);
+        if (packageInfo.receivers != null) {
+            for (ActivityInfo info : packageInfo.receivers) {
+                BroadcastReceiver receiver = null;
+                try {
+                    receiver = BroadcastReceiver.class.cast(classLoader.loadClass(info.name).newInstance());
+                    List<IntentFilter> intentFilters = map.get(info.packageName + "/" + info.name);
+                    for (IntentFilter intentFilter : intentFilters) {
+                        context.registerReceiver(receiver, intentFilter);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
-
 
     }
 
@@ -91,8 +93,10 @@ public class VirtualApk implements Parcelable {
         }
 
         app = instrumentation.newApplication(getClassLoader(), appClass, context);
+//        app.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks());
         instrumentation.callApplicationOnCreate(app);
     }
+
 
     protected AssetManager createAssetManager(Context context, File apk) {
         AssetManager am = context.getAssets();

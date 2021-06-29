@@ -40,7 +40,6 @@ class ButterKnifePlugin : Plugin<Project> {
         is AppPlugin -> {
           project.extensions[AppExtension::class].run {
             configureR2Generation(project, applicationVariants)
-
           }
         }
       }

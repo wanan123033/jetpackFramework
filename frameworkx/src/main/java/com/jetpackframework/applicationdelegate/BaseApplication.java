@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -23,6 +24,7 @@ public abstract class BaseApplication extends Application {
         delegate.init(this);
         handler = delegate.getHandler();
         onBaseContextAttached(base);
+        Log.e("TAG----",delegate.toString());
     }
     @Override
     public void onCreate() {
@@ -65,10 +67,11 @@ public abstract class BaseApplication extends Application {
         ApplicationCall.callOnExit(handler);
     }
 
-    @Override
-    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
-        super.registerActivityLifecycleCallbacks(new com.jetpackframework.ActivityLifecycleCallbacks(callback));
-    }
+
+//    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+//        Log.e("TAG----",this+"  registerActivityLifecycleCallbacks");
+//        super.registerActivityLifecycleCallbacks(new com.jetpackframework.ActivityLifecycleCallbacks(callback));
+//    }
 
     protected abstract ApplicationDelegate createApplicationDelegate();
 }

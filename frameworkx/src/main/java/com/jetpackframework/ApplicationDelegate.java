@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
 
+import com.gwm.annotation.router.AutoService;
 import com.jetpackframework.applicationdelegate.ApplicationCall;
 import com.jetpackframework.applicationdelegate.ApplicationHandler;
 import com.jetpackframework.arouter.ARouterApplicationDelegate;
@@ -28,14 +29,8 @@ public class ApplicationDelegate implements com.jetpackframework.applicationdele
 
     private com.jetpackframework.applicationdelegate.ApplicationDelegate jetPack,fixDex;
     private ARouterApplicationDelegate arouter;
-    public static ApplicationDelegate getInstance() {
-        if (delegate == null){
-            delegate = new ApplicationDelegate();
-        }
-        return delegate;
-    }
 
-    private ApplicationDelegate(){
+    public ApplicationDelegate(){
         jetPack = JetpackApplicationDelegate.getInstance();
 //        fixDex = FixDexApplicationDelegate.getInstance();
         arouter = ARouterApplicationDelegate.getInstance();
