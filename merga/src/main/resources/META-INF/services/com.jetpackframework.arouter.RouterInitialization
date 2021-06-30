@@ -1,0 +1,11 @@
+
+com.jgcj.arouter.JgcjRouter
+com.ldty.arouter.LdtyRouter
+com.zwtqq.arouter.ZwtqqRouter
+com.hwjs.arouter.HwjsRouter
+com.dataselectmanager.arouter.DataselectmanagerRouter
+com.ywqz.arouter.YwqzRouter
+com.fileexpoter.arouter.FileexpoterRouter
+com.ts.arouter.TsRouter
+com.appmodule.arouter.AppmoduleRouter
+com.hwsxq.arouter.HwsxqRouter

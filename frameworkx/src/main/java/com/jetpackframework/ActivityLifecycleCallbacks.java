@@ -16,7 +16,6 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        JetpackApplicationDelegate.getInstance().getActivitys().add(activity);
         if (callback != null){
             callback.onActivityCreated(activity,savedInstanceState);
         }
@@ -59,7 +58,6 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        JetpackApplicationDelegate.getInstance().getActivitys().remove(activity);
         if (callback != null){
             callback.onActivityDestroyed(activity);
         }

@@ -2,6 +2,7 @@ package com.gwm.compiler;
 
 import com.google.auto.service.AutoService;
 import com.gwm.annotation.layout.IOCWork;
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
@@ -46,6 +47,7 @@ public class FindViewProcessor extends BaseProcessor {
                 String values = element.getAnnotation(IOCWork.class).value();
                 System.out.println("----------");
                 TypeSpec.Builder datainflater = TypeSpec.classBuilder("LayoutInflaterUtils").addModifiers(Modifier.PUBLIC);
+                datainflater.addAnnotation(AnnotationSpec.builder(com.gwm.annotation.router.AutoService.class).addMember("value","$T.class",ClassName.get("com.jetpackframework.ioc","LayoutUtil")).build());
                 FieldSpec layouts = FieldSpec.builder(Map.class, "layouts", Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL).build();
                 datainflater.addField(layouts);
                 datainflater.addSuperinterface(ClassName.get("com.jetpackframework.ioc", "LayoutUtil"));
@@ -177,8 +179,6 @@ public class FindViewProcessor extends BaseProcessor {
                             .addModifiers(Modifier.STATIC, Modifier.PRIVATE)
                             .build();
                     datainflater.addField(instance);
-                    MethodSpec contrutor = MethodSpec.constructorBuilder().addModifiers(Modifier.PRIVATE).build();
-                    datainflater.addMethod(contrutor);
                     MethodSpec.Builder getInstance = MethodSpec.methodBuilder("getInstance").addModifiers(Modifier.PUBLIC, Modifier.STATIC, Modifier.SYNCHRONIZED).returns(ClassName.get(packageName, "LayoutInflaterUtils"));
                     getInstance.addCode("if(instance == null){\n\tinstance = new LayoutInflaterUtils();\n}\nreturn instance;\n");
                     datainflater.addMethod(getInstance.build());

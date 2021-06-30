@@ -6,6 +6,7 @@ import android.view.View;
 import com.jetpackframework.R;
 import com.jetpackframework.base.JetpackApplicationDelegate;
 
+import static com.blankj.utilcode.util.ColorUtils.getColor;
 import static com.blankj.utilcode.util.SizeUtils.sp2px;
 
 public class TitleBarBuilder {
@@ -186,7 +187,7 @@ public class TitleBarBuilder {
     }
 
     public int getBackgroundColor() {
-        return backgroundColor == 0 ? JetpackApplicationDelegate.getInstance().getResources().getColor(R.color.blue_btn_bg_color) : backgroundColor;
+        return backgroundColor == 0 ? getColor(R.color.blue_btn_bg_color) : backgroundColor;
     }
 
     public TitleBarBuilder setBackgroundColor(int backgroundColor) {

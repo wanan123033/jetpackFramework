@@ -24,7 +24,7 @@ public abstract class BaseCheckActivity<M,VM extends ViewModel<M>,V extends IVie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MMKV mmkv = JetpackApplicationDelegate.getInstance().getMmkv();
+        MMKV mmkv = MMKV.defaultMMKV();
         SystemSetting setting = mmkv.decodeParcelable(MMKVContract.SYSTEM_SETTING_BEAN,SystemSetting.class);
         if (setting == null){
             setting = new SystemSetting();

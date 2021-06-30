@@ -29,8 +29,7 @@ public abstract class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ARouterLayoutUtil.getInstance().init(this);
-        ARouterEventClassUtil.getInstance().init(this);
+
         ApplicationCall.callOnCreate(handler);
     }
 

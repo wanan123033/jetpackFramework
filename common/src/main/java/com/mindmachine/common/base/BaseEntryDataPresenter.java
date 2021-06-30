@@ -30,7 +30,7 @@ public abstract class BaseEntryDataPresenter<J extends BaseEntryDataPresenter.Ht
     private MMKV mmkv;
     public BaseEntryDataPresenter(Class<J> clazz) {
         super(clazz);
-        mmkv = JetpackApplicationDelegate.getInstance().getMmkv();
+        mmkv = MMKV.defaultMMKV();
     }
     protected String genJsonString(long bizType,String data){
         String lastUpdateTime = mmkv.getString(MMKVContract.LASTUPDATETIME,null);

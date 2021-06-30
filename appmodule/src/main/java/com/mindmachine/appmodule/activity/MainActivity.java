@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity<activity_app_main> {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MMKV mmkv = JetpackApplicationDelegate.getInstance().getMmkv();
+        MMKV mmkv = MMKV.defaultMMKV();
         List<Item> items = DBManager.getInstance().getItems();
         Log.e("TAG",items.toString());
         systemSetting = mmkv.decodeParcelable(MMKVContract.SYSTEM_SETTING_BEAN, SystemSetting.class);

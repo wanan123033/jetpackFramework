@@ -1,4 +1,5 @@
 
 com.mindmachine.appmodule.ApplicationDelegate
+com.jetpackframework.arouter.ARouterApplicationDelegate
 com.mindmachine.zwtqq.App
-com.jetpackframework.ApplicationDelegate
+com.jetpackframework.base.JetpackApplicationDelegate

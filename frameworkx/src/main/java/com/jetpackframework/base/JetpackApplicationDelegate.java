@@ -6,8 +6,12 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.os.Process;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.bytedance.boost_multidex.BoostMultiDex;
 import com.bytedance.boost_multidex.BoostMultiDexApplication;
@@ -29,26 +33,14 @@ import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JetpackApplicationDelegate implements ApplicationLifeCycle, ApplicationDelegate {
+public class JetpackApplicationDelegate implements ApplicationLifeCycle, ApplicationDelegate, Application.ActivityLifecycleCallbacks {
     private Application application;
     private ApplicationHandler handler;
     private LayoutUtil layoutUtil;
     private EventClassUtil eventClassUtil;
-    private List<String> firstToasts;
-    private MMKV mmkv;
     private List<Activity> activities;
 
-    private static JetpackApplicationDelegate delegate;
-    public synchronized static JetpackApplicationDelegate getInstance(){
-        if (delegate == null){
-            delegate = new JetpackApplicationDelegate();
-        }
-        return delegate;
-    }
 
-    private JetpackApplicationDelegate(){
-
-    }
     public void init(Application application){
         this.application = application;
         SoftReference<JetpackApplicationDelegate> delegateSoftReference = new SoftReference<>(this);
@@ -64,12 +56,11 @@ public class JetpackApplicationDelegate implements ApplicationLifeCycle, Applica
     @Override
     public void onCreate() {
         activities = new ArrayList<>();
-        firstToasts = new ArrayList<>();
+
         layoutUtil = ARouterLayoutUtil.getInstance();
         eventClassUtil = ARouterEventClassUtil.getInstance();
         MMKV.initialize(application);
-        mmkv = MMKV.defaultMMKV();
-        application.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks(null));
+        application.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks(this));
     }
 
     @Override
@@ -99,7 +90,6 @@ public class JetpackApplicationDelegate implements ApplicationLifeCycle, Applica
 
     @Override
     public void exit() {
-        firstToasts.clear();
         layoutUtil.clear();
         eventClassUtil.clear();
         Schedules.shutdown();
@@ -119,22 +109,45 @@ public class JetpackApplicationDelegate implements ApplicationLifeCycle, Applica
     public ApplicationHandler getHandler() {
         return handler;
     }
-    public List<String> getFisrstToasts(){
-        if (firstToasts == null){
-            throw new NullPointerException("jetpack no init");
-        }
-        return firstToasts;
-    }
 
-    public MMKV getMmkv() {
-        return mmkv;
-    }
 
     public Resources getResources() {
         return application.getResources();
     }
 
-    public List<Activity> getActivitys() {
-        return activities;
+
+    @Override
+    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+        activities.add(activity);
+    }
+
+    @Override
+    public void onActivityStarted(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityResumed(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPaused(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityStopped(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+    }
+
+    @Override
+    public void onActivityDestroyed(@NonNull Activity activity) {
+        activities.remove(activity);
     }
 }

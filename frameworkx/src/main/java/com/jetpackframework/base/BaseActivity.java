@@ -31,6 +31,7 @@ import com.jetpackframework.ioc.ARouterLayoutUtil;
 import com.jetpackframework.ioc.IEventClass;
 import com.jetpackframework.ioc.IViewBind;
 import com.jetpackframework.view.CustomDialog;
+import com.tencent.mmkv.MMKV;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -41,9 +42,8 @@ import java.util.List;
  * Activity通用基类
  *      1.封装Handler通讯机制
  *      2.Layout注解:IOC处理
- *      3.再按一次退出程序功能
- *      4.ARouter 跳转
- *      5.读取ARouter数据
+ *      3.ARouter 跳转
+ *      4.读取ARouter数据
  */
 public class BaseActivity<V extends IViewBind> extends AppCompatActivity implements HandlerListener {
     public static final String SHOW_PROGRESS = "6666";
@@ -51,11 +51,12 @@ public class BaseActivity<V extends IViewBind> extends AppCompatActivity impleme
     protected AppHandler appHandler;
     protected MyHandler handler;
     protected V mBinding;
-    private long exitTime = 0;
     private CustomDialog dialog;
+    protected MMKV mmkv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mmkv = MMKV.defaultMMKV();
         appHandler = AppHandler.getAppHandler();
         handler = new MyHandler(this);
         readRouterData();
@@ -137,14 +138,7 @@ public class BaseActivity<V extends IViewBind> extends AppCompatActivity impleme
      * 将Activity添加到退出通知
      */
     public void addFirstToast() {
-        JetpackApplicationDelegate.getInstance().getFisrstToasts().add(getActivityName());
-    }
-    /**
-     * 获取当前正在运行的Activity
-     * @return
-     */
-    private String getActivityName() {
-        return getClass().getSimpleName();
+
     }
 
     protected String getApplicationMetaValue(String name) {
@@ -158,29 +152,6 @@ public class BaseActivity<V extends IViewBind> extends AppCompatActivity impleme
             e.printStackTrace();
         }
         return value;
-    }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        List<String> activitys = JetpackApplicationDelegate.getInstance().getFisrstToasts();
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if((System.currentTimeMillis() - exitTime) > 2000 && (activitys.indexOf(getActivityName()) != -1)){
-                Toast.makeText(getApplicationContext(), "在按一次退出程序",Toast.LENGTH_SHORT).show();
-                exitTime = System.currentTimeMillis();
-            } else if ((JetpackApplicationDelegate.getInstance().getFisrstToasts().indexOf(getActivityName()) != -1)) {
-                JetpackApplicationDelegate.getInstance().exit();
-            }
-        }
-        if (keyCode == KeyEvent.KEYCODE_BACK && (activitys.indexOf(getActivityName()) != -1)) {
-            return true;
-        } else if (keyCode == KeyEvent.KEYCODE_BACK){
-            finish();
-            return true;
-        }
-        return onKeyDownMethod(keyCode, event);
-    }
-
-    public boolean onKeyDownMethod(int keyCode, KeyEvent event) {
-        return super.onKeyDown(keyCode,event);
     }
 
 

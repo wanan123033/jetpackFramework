@@ -3,12 +3,12 @@ package com.jetpackframework.ioc;
 import android.app.Application;
 import android.util.Log;
 
-import com.gwm.annotation.router.Merge;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ServiceLoader;
 
 /**
  * 解决EventClassUtil在组件化架构中的合并问题
@@ -25,22 +25,15 @@ public class ARouterEventClassUtil implements EventClassUtil{
         return instance;
     }
     public void init(Application application) {
-        Merge merge = application.getClass().getAnnotation(Merge.class);
-        if (merge != null){
-            String[] value = merge.value();
-            if (com == null){
-                com = new ArrayList<>();
-            }
-            com.clear();
-            for (String va : value){
-                Class event = null;
-                try {
-                    event = Class.forName("com."+va+".layoutevent.EventInflaterUtils");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                com.add(event);
-            }
+        if (com == null){
+            com = new ArrayList<>();
+        }
+        com.clear();
+        ServiceLoader<EventClassUtil> load = ServiceLoader.load(EventClassUtil.class);
+        Iterator<EventClassUtil> iterator = load.iterator();
+        while (iterator.hasNext()){
+            EventClassUtil util = iterator.next();
+            com.add(util.getClass());
         }
     }
 

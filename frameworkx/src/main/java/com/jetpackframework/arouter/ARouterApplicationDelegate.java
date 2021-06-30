@@ -9,6 +9,8 @@ import com.jetpackframework.ContextUtil;
 import com.jetpackframework.Reflector;
 import com.jetpackframework.applicationdelegate.ApplicationDelegate;
 import com.jetpackframework.applicationdelegate.ApplicationHandler;
+import com.jetpackframework.ioc.ARouterEventClassUtil;
+import com.jetpackframework.ioc.ARouterLayoutUtil;
 
 import java.lang.ref.SoftReference;
 import java.util.List;
@@ -20,29 +22,12 @@ public class ARouterApplicationDelegate implements ApplicationDelegate {
     private Application application;
     private ApplicationHandler handler;
 
-    private static ARouterApplicationDelegate delegate;
-
-    private ARouterApplicationDelegate(){
-
-    }
-
-    public static synchronized ARouterApplicationDelegate getInstance() {
-        if (delegate == null){
-            delegate = new ARouterApplicationDelegate();
-        }
-        return delegate;
-    }
-
     @Override
     public void onCreate() {
         ContextUtil.setGlobalContext(application);
-        RouterInitialization o = null;
-        try {
-            o = Reflector.on("com.router.merge.MoudleRouter").constructor().newInstance();
-        } catch (Reflector.ReflectedException e) {
-            e.printStackTrace();
-        }
-        RouterApp.init(o);
+        RouterApp.init(new RouterMerga());
+        ARouterLayoutUtil.getInstance().init(application);
+        ARouterEventClassUtil.getInstance().init(application);
     }
     @Override
     public void onLowMemory() {

@@ -48,13 +48,13 @@ public class ItemContract {
 
     public static void setCurrentItem(int currentItem) {
         ItemContract.currentItem = currentItem;
-        MMKV mmkv = JetpackApplicationDelegate.getInstance().getMmkv();
+        MMKV mmkv = MMKV.defaultMMKV();
         mmkv.putInt(MMKVContract.CURRENT_ITEM_CODE,currentItem);
     }
 
     public static int getCurrentItemCode() {
         if (currentItem == 0){
-            MMKV mmkv = JetpackApplicationDelegate.getInstance().getMmkv();
+            MMKV mmkv = MMKV.defaultMMKV();
             currentItem = mmkv.getInt(MMKVContract.CURRENT_ITEM_CODE,currentItem);
         }
         return currentItem;

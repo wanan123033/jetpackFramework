@@ -9,6 +9,7 @@ import com.gwm.annotation.layout.OnItemClick;
 import com.gwm.annotation.layout.OnItemSelected;
 import com.gwm.annotation.layout.OnLongClick;
 import com.gwm.annotation.layout.OnMultiClick;
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
@@ -38,6 +39,8 @@ public class EventProcessor extends BaseProcessor {
                 IOCWork iocWork = ele.getAnnotation(IOCWork.class);
                 String value = iocWork.value();
                 TypeSpec.Builder eventUtil = TypeSpec.classBuilder("EventInflaterUtils").addModifiers(Modifier.PUBLIC);
+                eventUtil.addAnnotation(AnnotationSpec.builder(com.gwm.annotation.router.AutoService.class).addMember("value","$T.class",ClassName.get("com.jetpackframework.ioc","EventClassUtil")).build());
+
                 eventUtil.addSuperinterface(ClassName.get("com.jetpackframework.ioc","EventClassUtil"));
                 FieldSpec eventArr = FieldSpec.builder(ClassName.get("java.util","HashMap"),"eventArr", Modifier.PRIVATE).build();
                 eventUtil.addField(eventArr);
@@ -133,10 +136,11 @@ public class EventProcessor extends BaseProcessor {
                                 " if(bind == null){\n" +
                                 "\t try {\n" +
                                 "\t      bind = (IEventClass) Class.forName(\"com."+value+".layoutevent.\"+simpleName.getSimpleName()+\"Event\").newInstance();\n" +
+                                "\t      eventArr.put(simpleName.getPackage().getName()+\".\"+simpleName.getSimpleName(),bind);\n" +
                                 "\t } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {\n" +
-                                "\t      e.printStackTrace();\n" +
+
                                 "\t }\n" +
-                                "\teventArr.put(simpleName.getPackage().getName()+\".\"+simpleName.getSimpleName(),bind);\n" +
+
                                 " }\n" +
                                 " return bind;\n",ClassName.get("com.jetpackframework.ioc","IEventClass"))
                         .addAnnotation(Override.class)
@@ -153,8 +157,8 @@ public class EventProcessor extends BaseProcessor {
                         .addModifiers(Modifier.STATIC,Modifier.PRIVATE)
                         .build();
                 eventUtil.addField(instance);
-                MethodSpec contrutor = MethodSpec.constructorBuilder().addModifiers(Modifier.PRIVATE).build();
-                eventUtil.addMethod(contrutor);
+//                MethodSpec contrutor = MethodSpec.constructorBuilder().addModifiers(Modifier.PRIVATE).build();
+//                eventUtil.addMethod(contrutor);
                 MethodSpec.Builder getInstance = MethodSpec.methodBuilder("getInstance").addModifiers(Modifier.PUBLIC,Modifier.STATIC,Modifier.SYNCHRONIZED).returns(ClassName.get("com."+value+".layoutevent","EventInflaterUtils"));
                 getInstance.addCode("if(instance == null){\n\tinstance = new EventInflaterUtils();\n}\nreturn instance;\n");
                 eventUtil.addMethod(getInstance.build());

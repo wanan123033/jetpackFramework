@@ -86,7 +86,8 @@ public class AutoServiceProcessor extends BaseProcessor{
                 }
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 if (fileName.equals("com.jetpackframework.applicationdelegate.ApplicationDelegate")){
-                    cacheString.add("com.jetpackframework.ApplicationDelegate");
+                    cacheString.add("com.jetpackframework.base.JetpackApplicationDelegate");
+                    cacheString.add("com.jetpackframework.arouter.ARouterApplicationDelegate");
                 }
                 for (String ssss : cacheString){
                     byte[] bytes = (ssss+"\n").getBytes();

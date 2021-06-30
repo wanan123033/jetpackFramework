@@ -7,6 +7,7 @@ import android.os.Build;
 import android.util.ArrayMap;
 
 import com.jetpackframework.ContextUtil;
+import com.jetpackframework.Reflector;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -34,9 +35,8 @@ import static android.os.Build.VERSION.SDK_INT;
  最后调用Resources.updateConfiguration将Resources对象的配置信息更新到最新状态，完成整个资源替换的过程
  */
 public class FixResourceUtils {
-    private Field assetsFiled;
-    private Method addAssetPathMethod;
-    private Field resourcesImplFiled;
+    private Reflector assetsFiled;
+    private Reflector resourcesImplFiled;
     private Object currentActivityThread;
     private Collection<WeakReference<Resources>> references;
     private AssetManager assetManager;
@@ -54,43 +54,37 @@ public class FixResourceUtils {
     private FixResourceUtils() throws Throwable {
         //获取基本所需的对象及方法
         //1.获取ActivityThread对象
-        Class<?> activityThread = Class.forName("android.app.ActivityThread");
-        currentActivityThread = ReflectUtil.getActivityThread(ContextUtil.get(), activityThread);
+//        Class<?> activityThread = Class.forName("android.app.ActivityThread");
+        currentActivityThread = Reflector.on("android.app.ActivityThread").method("currentActivityThread").call();
 
         //2.获取resource对象
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-            Class<?> resoucesManagerClass = Class.forName("android.app.ResourcesManager");
-            Method getInstance = ReflectUtil.findMethod(resoucesManagerClass, "getInstance");
-            Object resoucesManager = getInstance.invoke(null);
+            Object resoucesManager = Reflector.on("android.app.ResourcesManager").method("getInstance").call();
             try {
-                Field mActiveResourcesField = ReflectUtil.findField(resoucesManagerClass, "mActiveResources");
-                references = ((ArrayMap<?, WeakReference<Resources>>)mActiveResourcesField.get(resoucesManager)).values();
-            }catch (NoSuchFieldException e){
-                final Field mResourceReferences = ReflectUtil.findField(resoucesManagerClass, "mResourceReferences");
-                references = (Collection<WeakReference<Resources>>) mResourceReferences.get(resoucesManager);
+                ArrayMap<?, WeakReference<Resources>> mActiveResourcesField = Reflector.with(resoucesManager).field("mActiveResources").get();
+                references = mActiveResourcesField.values();
+            }catch (Exception e){
+                references = Reflector.with(resoucesManager).field("mResourceReferences").get();;
             }
         }else {
-            final Field fMActiveResources = ReflectUtil.findField(activityThread, "mActiveResources");
-            final HashMap<?, WeakReference<Resources>> activeResources7 =
-                    (HashMap<?, WeakReference<Resources>>) fMActiveResources.get(currentActivityThread);
+            final HashMap<?, WeakReference<Resources>> activeResources7 = Reflector.with(currentActivityThread).field("mActiveResources").get();
             references = activeResources7.values();
         }
 
         //3.获取 addAssetPathMethod 方法
         final AssetManager assets = ContextUtil.get().getAssets();
-        addAssetPathMethod = ReflectUtil.findMethod(assets, "addAssetPath", String.class);
-        assetManager = (AssetManager) ReflectUtil.findConstructor(assets).newInstance();
+        assetManager = Reflector.with(assets).constructor().newInstance();
         Resources resources = ContextUtil.get().getResources();
         if (SDK_INT >= 24) {
             try {
                 // N moved the mAssets inside an mResourcesImpl field
-                resourcesImplFiled = ReflectUtil.findField(resources, "mResourcesImpl");
+                resourcesImplFiled = Reflector.with(resources).field("mResourcesImpl");
             } catch (Throwable ignore) {
                 // for safety
-                assetsFiled = ReflectUtil.findField(resources, "mAssets");
+                assetsFiled = Reflector.with(resources).field("mAssets");
             }
         } else {
-            assetsFiled = ReflectUtil.findField(resources, "mAssets");
+            assetsFiled = Reflector.with(resources).field("mAssets");
         }
 
     }
@@ -110,7 +104,12 @@ public class FixResourceUtils {
         }
 
         try {
-            addAssetPathMethod.invoke(assetManager,resourceDir);
+            AssetManager assets = ContextUtil.get().getAssets();
+            try {
+                Reflector.with(assets).method("addAssetPath",String.class).call(resourceDir);
+            } catch (Reflector.ReflectedException e) {
+                e.printStackTrace();
+            }
             for (WeakReference<Resources> wr : references) {
                 final Resources resources = wr.get();
                 if (resources == null) {
@@ -124,13 +123,17 @@ public class FixResourceUtils {
                     // N
                     final Object resourceImpl = resourcesImplFiled.get(resources);
                     // for Huawei HwResourcesImpl
-                    final Field implAssets = ReflectUtil.findField(resourceImpl, "mAssets");
-                    implAssets.set(resourceImpl, assetManager);
+                    try {
+                        Reflector.with(resourceImpl).field("mAssets").set(assetManager);
+                    } catch (Reflector.ReflectedException e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 resources.updateConfiguration(resources.getConfiguration(), resources.getDisplayMetrics());
             }
             return true;
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchFieldException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

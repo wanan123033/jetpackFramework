@@ -26,7 +26,6 @@ import com.tencent.mmkv.MMKV;
 @Layout(R2.layout.activity_param_setting)
 public class ParamSettingActivity extends BaseTitleActivity<activity_param_setting> {
     private SystemSetting systemSetting;
-    private MMKV mmkv;
     @Override
     public TitleBarBuilder setTitleBuilder(TitleBarBuilder titleBarBuilder) {
         return titleBarBuilder.setTitle("参数设置");
@@ -35,7 +34,6 @@ public class ParamSettingActivity extends BaseTitleActivity<activity_param_setti
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mmkv = JetpackApplicationDelegate.getInstance().getMmkv();
         systemSetting = mmkv.decodeParcelable(MMKVContract.SYSTEM_SETTING_BEAN, SystemSetting.class);
         if (systemSetting == null){
             systemSetting = new SystemSetting();

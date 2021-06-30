@@ -20,16 +20,6 @@ public class FixDexApplicationDelegate implements ApplicationDelegate {
     public static void setFixConfig(FixConfig config){
         fixConfig = config;
     }
-    private FixDexApplicationDelegate(){
-    }
-
-    public static synchronized FixDexApplicationDelegate getInstance() {
-        if (delegate == null){
-            delegate = new FixDexApplicationDelegate();
-        }
-        return delegate;
-    }
-
     @Override
     public void onCreate() {
         FixDexUtils.getInstance().loadDex(fixConfig.getDexDir());

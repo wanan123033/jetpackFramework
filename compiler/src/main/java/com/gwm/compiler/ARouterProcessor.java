@@ -3,6 +3,7 @@ package com.gwm.compiler;
 import com.google.auto.service.AutoService;
 import com.gwm.annotation.router.ARouter;
 import com.gwm.annotation.router.Module;
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
@@ -28,6 +29,7 @@ public class ARouterProcessor extends BaseProcessor{
                 Module module = element.getAnnotation(Module.class);
                 TypeSpec.Builder fileRouter = TypeSpec.classBuilder(captureName(module.value()) + "Router").addSuperinterface(ClassName.get("com.jetpackframework.arouter", "RouterInitialization"));
                 fileRouter.addModifiers(Modifier.PUBLIC);
+                fileRouter.addAnnotation(AnnotationSpec.builder(com.gwm.annotation.router.AutoService.class).addMember("value","$T.class",ClassName.get("com.jetpackframework.arouter","RouterInitialization")).build());
                 MethodSpec.Builder onInit = MethodSpec.methodBuilder("onInit")
                         .addAnnotation(Override.class)
                         .addModifiers(Modifier.PUBLIC)
