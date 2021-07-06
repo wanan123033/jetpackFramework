@@ -28,4 +28,6 @@ public interface HttpContract {
     @HTTP(url = "")
     Observable<RosterDownBean> rosterdown(@HeaderString("Authorization")String token, @JSON String json);
 
+
+
 }

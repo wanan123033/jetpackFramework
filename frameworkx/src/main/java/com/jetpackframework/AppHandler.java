@@ -14,5 +14,4 @@ public class AppHandler extends android.os.Handler {
     public static synchronized AppHandler getAppHandler(){
         return appHandler;
     }
-
 }

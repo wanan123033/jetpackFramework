@@ -27,6 +27,7 @@ public class CallBack<T> extends com.zhy.http.okhttp.callback.Callback<T> implem
 
     @Override
     public void onResponse(Call call, Response response) throws IOException {
+        httpParams.observer.onHeader(response.headers());
         T t = parseNetworkResponse(response,0);
         onResponse(t,0);
     }

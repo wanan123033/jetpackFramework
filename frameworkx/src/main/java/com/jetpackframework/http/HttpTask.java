@@ -26,7 +26,7 @@ public class HttpTask<T> {
 
         /**
          * UI Thread
-         *
+         *response.headers()
          * @param request
          */
         void onBefore(Request request, int id){
