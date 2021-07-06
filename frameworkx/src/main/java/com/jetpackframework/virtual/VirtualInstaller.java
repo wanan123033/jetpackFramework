@@ -89,7 +89,8 @@ public class VirtualInstaller implements ServiceConnection {
     }
 
     public void install(File apkFile, IVirtualInstallListenner listenner) throws RemoteException {
-        String packageName = virtual.install(apkFile.getAbsolutePath(),listenner);
+        if (virtual != null)
+            virtual.install(apkFile.getAbsolutePath(),listenner);
     }
 
     @Override

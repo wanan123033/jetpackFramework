@@ -35,6 +35,8 @@ public class Router {
     private boolean interceptor = true;
     private String fromUrl;
     private Class toClass;
+    private int enterAnim;
+    private int exitAnim;
 
     private Router(){
         intent = new Intent();
@@ -233,6 +235,12 @@ public class Router {
         return this;
     }
 
+    public Router transition(int enterAnim, int exitAnim){
+        router.enterAnim = enterAnim;
+        router.exitAnim = exitAnim;
+        return this;
+    }
+
     /**
      * 跳转去哪里
      */
@@ -289,6 +297,7 @@ public class Router {
         router.routerInterceptors.clear();
         router.routerInterceptors = null;
         router.context = null;
+        router.baseActivity = null;
         router = null;
     }
 
@@ -314,6 +323,9 @@ public class Router {
             }
             if (!flag[0]) {
                 baseActivity.startActivity(intent);
+                if (enterAnim != 0 && exitAnim != 0){
+                    baseActivity.overridePendingTransition(enterAnim,exitAnim);
+                }
             }
             clear();
         }catch (ActivityNotFoundException e){

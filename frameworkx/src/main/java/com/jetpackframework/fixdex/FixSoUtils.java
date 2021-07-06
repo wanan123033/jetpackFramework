@@ -3,6 +3,7 @@ package com.jetpackframework.fixdex;
 import android.os.Build;
 
 import com.jetpackframework.ContextUtil;
+import com.jetpackframework.Reflector;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,8 +56,7 @@ public class FixSoUtils {
         @Deprecated
         private static void install(ClassLoader classLoader, File folder) throws Throwable {
             String addPath = folder.getPath();
-            Field pathField = ReflectUtil.findField(classLoader, "libPath");
-            final String origLibPaths = (String) pathField.get(classLoader);
+            final String origLibPaths = Reflector.with(classLoader).field("libPath").get();
             final String[] origLibPathSplit = origLibPaths.split(":");
             final StringBuilder newLibPaths = new StringBuilder(addPath);
 
@@ -66,10 +66,10 @@ public class FixSoUtils {
                 }
                 newLibPaths.append(':').append(origLibPath);
             }
-            pathField.set(classLoader, newLibPaths.toString());
+            Reflector.with(classLoader).field("libPath").set(newLibPaths.toString());
 
-            final Field libraryPathElementsFiled = ReflectUtil.findField(classLoader, "libraryPathElements");
-            final List<String> libraryPathElements = (List<String>) libraryPathElementsFiled.get(classLoader);
+            final Reflector libraryPathElementsFiled = Reflector.with(classLoader).field("libraryPathElements");
+            final List<String> libraryPathElements = libraryPathElementsFiled.get();
             final Iterator<String> libPathElementIt = libraryPathElements.iterator();
             while (libPathElementIt.hasNext()) {
                 final String libPath = libPathElementIt.next();
@@ -79,17 +79,16 @@ public class FixSoUtils {
                 }
             }
             libraryPathElements.add(0, addPath);
-            libraryPathElementsFiled.set(classLoader, libraryPathElements);
+            libraryPathElementsFiled.set(libraryPathElements);
         }
     }
 
     private static final class V14 {
         private static void install(ClassLoader classLoader, File folder) throws Throwable {
-            final Field pathListField = ReflectUtil.findField(classLoader, "pathList");
-            final Object dexPathList = pathListField.get(classLoader);
+            final Object dexPathList = Reflector.with(classLoader).field("pathList").get();
 
-            final Field nativeLibDirField = ReflectUtil.findField(dexPathList, "nativeLibraryDirectories");
-            final File[] origNativeLibDirs = (File[]) nativeLibDirField.get(dexPathList);
+            final Reflector nativeLibDirField = Reflector.with(dexPathList).field("nativeLibraryDirectories");
+            final File[] origNativeLibDirs = nativeLibDirField.get();
 
             final List<File> newNativeLibDirList = new ArrayList<>(origNativeLibDirs.length + 1);
             newNativeLibDirList.add(folder);
@@ -98,18 +97,14 @@ public class FixSoUtils {
                     newNativeLibDirList.add(origNativeLibDir);
                 }
             }
-            nativeLibDirField.set(dexPathList, newNativeLibDirList.toArray(new File[0]));
+            nativeLibDirField.set(newNativeLibDirList.toArray(new File[0]));
         }
     }
 
     private static final class V23 {
         private static void install(ClassLoader classLoader, File folder) throws Throwable {
-            final Field pathListField = ReflectUtil.findField(classLoader, "pathList");
-            final Object dexPathList = pathListField.get(classLoader);
-
-            final Field nativeLibraryDirectories = ReflectUtil.findField(dexPathList, "nativeLibraryDirectories");
-
-            List<File> origLibDirs = (List<File>) nativeLibraryDirectories.get(dexPathList);
+            final Object dexPathList = Reflector.with(classLoader).field("pathList").get();
+            List<File> origLibDirs = Reflector.with(dexPathList).field("nativeLibraryDirectories").get();
             if (origLibDirs == null) {
                 origLibDirs = new ArrayList<>(2);
             }
@@ -122,9 +117,7 @@ public class FixSoUtils {
                 }
             }
             origLibDirs.add(0, folder);
-
-            final Field systemNativeLibraryDirectories = ReflectUtil.findField(dexPathList, "systemNativeLibraryDirectories");
-            List<File> origSystemLibDirs = (List<File>) systemNativeLibraryDirectories.get(dexPathList);
+            List<File> origSystemLibDirs = Reflector.with(dexPathList).field("systemNativeLibraryDirectories").get();
             if (origSystemLibDirs == null) {
                 origSystemLibDirs = new ArrayList<>(2);
             }
@@ -133,25 +126,20 @@ public class FixSoUtils {
             newLibDirs.addAll(origLibDirs);
             newLibDirs.addAll(origSystemLibDirs);
 
-            final Method makeElements = ReflectUtil.findMethod(dexPathList,
-                    "makePathElements", List.class, File.class, List.class);
             final ArrayList<IOException> suppressedExceptions = new ArrayList<>();
 
-            final Object[] elements = (Object[]) makeElements.invoke(dexPathList, newLibDirs, null, suppressedExceptions);
+            final Object[] elements = Reflector.with(dexPathList).method("makePathElements", List.class, File.class, List.class).call(newLibDirs, null, suppressedExceptions);
 
-            final Field nativeLibraryPathElements = ReflectUtil.findField(dexPathList, "nativeLibraryPathElements");
-            nativeLibraryPathElements.set(dexPathList, elements);
+            Reflector.with(dexPathList).field("nativeLibraryPathElements").set(elements);
         }
     }
 
     private static final class V25 {
         private static void install(ClassLoader classLoader, File folder)  throws Throwable {
-            final Field pathListField = ReflectUtil.findField(classLoader, "pathList");
-            final Object dexPathList = pathListField.get(classLoader);
+            final Object dexPathList = Reflector.with(classLoader).field("pathList").get();
 
-            final Field nativeLibraryDirectories = ReflectUtil.findField(dexPathList, "nativeLibraryDirectories");
 
-            List<File> origLibDirs = (List<File>) nativeLibraryDirectories.get(dexPathList);
+            List<File> origLibDirs = Reflector.with(dexPathList).field("nativeLibraryDirectories").get();
             if (origLibDirs == null) {
                 origLibDirs = new ArrayList<>(2);
             }
@@ -165,8 +153,7 @@ public class FixSoUtils {
             }
             origLibDirs.add(0, folder);
 
-            final Field systemNativeLibraryDirectories = ReflectUtil.findField(dexPathList, "systemNativeLibraryDirectories");
-            List<File> origSystemLibDirs = (List<File>) systemNativeLibraryDirectories.get(dexPathList);
+            List<File> origSystemLibDirs = Reflector.with(dexPathList).field("systemNativeLibraryDirectories").get();
             if (origSystemLibDirs == null) {
                 origSystemLibDirs = new ArrayList<>(2);
             }
@@ -175,12 +162,10 @@ public class FixSoUtils {
             newLibDirs.addAll(origLibDirs);
             newLibDirs.addAll(origSystemLibDirs);
 
-            final Method makeElements = ReflectUtil.findMethod(dexPathList, "makePathElements", List.class);
 
-            final Object[] elements = (Object[]) makeElements.invoke(dexPathList, newLibDirs);
+            final Object[] elements = Reflector.with(dexPathList).method("makePathElements",List.class).call(newLibDirs);
 
-            final Field nativeLibraryPathElements = ReflectUtil.findField(dexPathList, "nativeLibraryPathElements");
-            nativeLibraryPathElements.set(dexPathList, elements);
+            Reflector.with(dexPathList).field("nativeLibraryPathElements").set(elements);
         }
     }
 

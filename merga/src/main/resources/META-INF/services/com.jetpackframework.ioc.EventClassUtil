@@ -4,8 +4,8 @@ com.appmodule.layoutevent.EventInflaterUtils
 com.zwtqq.layoutevent.EventInflaterUtils
 com.hwsxq.layoutevent.EventInflaterUtils
 com.ywqz.layoutevent.EventInflaterUtils
-com.ldty.layoutevent.EventInflaterUtils
 com.dataselectmanager.layoutevent.EventInflaterUtils
+com.ldty.layoutevent.EventInflaterUtils
 com.ts.layoutevent.EventInflaterUtils
 com.jgcj.layoutevent.EventInflaterUtils
 com.hwjs.layoutevent.EventInflaterUtils

@@ -220,4 +220,35 @@ public class VirtualApk implements Parcelable {
         }
         return null;
     }
+    public ProviderInfo getProviderInfo(ComponentName contentUri) {
+        return null;
+    }
+
+    public Intent getLaunchIntent() {
+        return null;
+    }
+
+    public ActivityInfo getReceiverInfo(ComponentName component) {
+        for (ActivityInfo info : packageInfo.receivers) {
+            Log.e("TAG----","info.packageName="+info.packageName+",info.name="+info.name);
+
+            if (info.packageName.equals(component.getPackageName()) && info.name.equals(component.getClassName())){
+                return info;
+            }
+        }
+        return null;
+    }
+
+    public ResolveInfo resolveActivity(Intent intent, int flags) {
+        ResolveInfo info = null;
+        ComponentName componentName = intent.getComponent();
+        for (ActivityInfo activityInfo : packageInfo.activities){
+            if (activityInfo.packageName.equals(componentName.getPackageName()) && activityInfo.name.equals(componentName.getClassName())){
+                info = new ResolveInfo();
+                info.activityInfo = activityInfo;
+                break;
+            }
+        }
+        return info;
+    }
 }

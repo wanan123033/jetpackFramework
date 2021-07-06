@@ -137,13 +137,4 @@ public class SoInstaller {
         SharedPreferences preferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         return preferences.getInt(name, 0);
     }
-    private static void loadLibrary(String path){
-        File file = new File(path);
-        if (file.isDirectory()){
-            File[] files = file.listFiles();
-            for (File f : files){
-                System.load(f.getAbsolutePath());
-            }
-        }
-    }
 }

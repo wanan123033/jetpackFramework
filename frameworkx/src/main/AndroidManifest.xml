@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service android:name=".fixdex.FixService" android:process=":fix" android:exported="true"/>
-        <service android:name=".virtual.VirtualInstallService" android:process=":install"/>
+        <service android:name=".virtual.VirtualInstallService" android:process=":install" android:exported="true"/>
         <service android:name=".virtual.delegate.RemoteService" />
 
         <activity android:name="com.virtual.singleTop.landscape.v$1" android:launchMode="singleTop" android:screenOrientation="landscape"/>
