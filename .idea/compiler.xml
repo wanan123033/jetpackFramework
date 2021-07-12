@@ -24,6 +24,7 @@
       <module name="jetpackframework.common" target="1.8" />
       <module name="jetpackframework.database" target="1.8" />
       <module name="jetpackframework.dataselectmanager" target="1.8" />
+      <module name="jetpackframework.ffmpeg" target="1.8" />
       <module name="jetpackframework.fileexpoter" target="1.8" />
       <module name="jetpackframework.frameworkx" target="1.8" />
       <module name="jetpackframework.hwjs" target="1.8" />
@@ -35,6 +36,7 @@
       <module name="jetpackframework.saferoom" target="1.8" />
       <module name="jetpackframework.serialportapi" target="1.8" />
       <module name="jetpackframework.ts" target="1.8" />
+      <module name="jetpackframework.webrtc" target="1.8" />
       <module name="jetpackframework.ywqz" target="1.8" />
       <module name="jetpackframework.zwtqq" target="1.8" />
     </bytecodeTargetLevel>

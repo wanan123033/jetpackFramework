@@ -251,5 +251,15 @@
       <option name="name" value="maven" />
       <option name="url" value="file:/$PROJECT_DIR$/merga/build/localMaven/R2GenCreator" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="file:/$PROJECT_DIR$/webrtc/build/localMaven/R2GenCreator" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="file:/$PROJECT_DIR$/ffmpeg/build/localMaven/R2GenCreator" />
+    </remote-repository>
   </component>
 </project>

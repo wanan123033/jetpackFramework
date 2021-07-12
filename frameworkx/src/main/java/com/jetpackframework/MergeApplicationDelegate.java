@@ -20,7 +20,7 @@ public class MergeApplicationDelegate implements com.jetpackframework.applicatio
     private ApplicationHandler handler;
     private Application application;
 
-    List<ApplicationDelegate> delegates;
+    private List<ApplicationDelegate> delegates;
 
     @Override
     public Handler getHandler() {
@@ -40,6 +40,10 @@ public class MergeApplicationDelegate implements com.jetpackframework.applicatio
         for (ApplicationDelegate delegate : delegates){
             delegate.init(application);
         }
+    }
+
+    public List<ApplicationDelegate> getDelegates(){
+        return delegates;
     }
 
     @Override

@@ -26,4 +26,6 @@ public interface BaseLifeCycleObserver extends LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestory(LifecycleOwner owner);
+
+
 }

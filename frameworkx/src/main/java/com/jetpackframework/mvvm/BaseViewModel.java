@@ -1,7 +1,5 @@
 package com.jetpackframework.mvvm;
 
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 

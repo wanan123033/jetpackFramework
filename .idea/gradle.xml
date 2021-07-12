@@ -11,24 +11,13 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/anno" />
-            <option value="$PROJECT_DIR$/appmodule" />
-            <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/compiler" />
-            <option value="$PROJECT_DIR$/database" />
-            <option value="$PROJECT_DIR$/dataselectmanager" />
-            <option value="$PROJECT_DIR$/fileexpoter" />
+            <option value="$PROJECT_DIR$/ffmpeg" />
             <option value="$PROJECT_DIR$/frameworkx" />
             <option value="$PROJECT_DIR$/gradlewPlugin" />
-            <option value="$PROJECT_DIR$/hwjs" />
-            <option value="$PROJECT_DIR$/hwsxq" />
-            <option value="$PROJECT_DIR$/jgcj" />
-            <option value="$PROJECT_DIR$/ldty" />
             <option value="$PROJECT_DIR$/magicindicator" />
             <option value="$PROJECT_DIR$/merga" />
             <option value="$PROJECT_DIR$/serialportapi" />
-            <option value="$PROJECT_DIR$/ts" />
-            <option value="$PROJECT_DIR$/ywqz" />
-            <option value="$PROJECT_DIR$/zwtqq" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

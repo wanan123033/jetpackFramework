@@ -8,6 +8,7 @@ import com.jetpackframework.http.HttpObserver;
 import com.jetpackframework.rxjetpack.Observable;
 import com.jetpackframework.rxjetpack.thread.Schedules;
 
+import okhttp3.Headers;
 import okhttp3.WebSocketListener;
 
 /**
@@ -59,6 +60,12 @@ public abstract class BaseDataPresenter<H,D> extends WebSocketListener implement
                 .subscribeOn(Schedules.androidMainThread())
                 .subscribe();
     }
+
+    @Override
+    public void onHeader(Headers headers) {
+
+    }
+
     protected abstract  void onNextResult(D response, int id);
 
     protected abstract void onErrorResult(Exception e, int id);

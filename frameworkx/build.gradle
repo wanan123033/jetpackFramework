@@ -40,6 +40,7 @@ dependencies {
     api 'androidx.room:room-runtime:2.2.5'
     api project(':anno')
     api project(':serialportapi')
+    api project(':merga')
     api 'com.blankj:utilcodex:1.25.2'
     api 'com.google.code.gson:gson:2.8.6'
     api 'com.inuker.bluetooth:library:1.4.0'

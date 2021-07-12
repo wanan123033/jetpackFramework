@@ -158,7 +158,6 @@ public class BaseActivity<V extends IViewBind> extends AppCompatActivity impleme
     public void handleMessage(Message message){
 
     }
-
     public void arouterActivity(String url) {
         Router.getInstance(this).to(url).router();
     }

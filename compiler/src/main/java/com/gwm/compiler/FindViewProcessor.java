@@ -74,6 +74,7 @@ public class FindViewProcessor extends BaseProcessor {
                 }
                 if (layoutDir.isDirectory()) {
                     File[] files = layoutDir.listFiles();
+
                     for (File file : files) {
                         String name = file.getName();
                         TypeSpec.Builder clazz = TypeSpec.classBuilder(name.substring(0, name.indexOf("."))).addModifiers(Modifier.PUBLIC);

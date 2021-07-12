@@ -82,6 +82,7 @@ public class AutoServiceProcessor extends BaseProcessor{
                 String s = new String(stringBuilder.toByteArray());
                 String[] split = s.split("\n");
                 for (String s1 : split){
+                    if (s1 != null && !s1.equals(""))
                     cacheString.add(s1);
                 }
                 FileOutputStream fileOutputStream = new FileOutputStream(file);

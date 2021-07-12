@@ -1,5 +1,3 @@
-
-com.mindmachine.appmodule.ApplicationDelegate
+com.jetpack.webrtc.WebRtcApplicationDelegate
 com.jetpackframework.arouter.ARouterApplicationDelegate
-com.mindmachine.zwtqq.App
 com.jetpackframework.base.JetpackApplicationDelegate
